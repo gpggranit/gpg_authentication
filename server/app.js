@@ -119,6 +119,12 @@ passport.deserializeUser(function(id, done) {
 	
 	var auth = require('./routes/auth');
 	app.use('/api', auth);
+	
+	var representant = require('./routes/representant');
+	app.use('/api', representant);
+	
+	var city = require('./routes/city');
+	app.use('/api', city);
 
 //*******************************************************
 
