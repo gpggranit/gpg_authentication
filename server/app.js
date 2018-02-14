@@ -130,10 +130,6 @@ passport.deserializeUser(function(id, done) {
 
 
 
-
-//app.use('/api/get_users', users);
-//app.use('/api/get_config', config3d);
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
