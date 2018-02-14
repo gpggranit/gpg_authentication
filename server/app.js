@@ -7,14 +7,21 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var session = require('express-session');
 var localStrategy = require('passport-local').Strategy;
-//var odbc = require('odbc')();	//connecteur odbc
-//var cn = "DSN=TEST_ODBC_HF;";	//variable de connexion
-var odbc_connect = require('./db/odbc');
 
-var index = require('./routes/index');
-//var users = require('./routes/users');
+
+//****** IMPORT FONCTION DE CONNEXION ODBC HF ***********
+	var odbc_connect = require('./db/odbc');
+//*******************************************************
+
 
 var app = express();
+	
+	
+
+
+//var users = require('./routes/users');
+
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,16 +35,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//variables de session
+
+
+//**************************  VARIBLES DE SESSION   *************************************
 app.use(session({
     secret: 'secret',
     resave: true,
     saveUninitialized: false,
     cookie: { maxAge: 60000, secure: false }
  }));
+//****************************************************************************************
 
 
-//variables de passaport.js
+//**************************  VARIBLES DE PASSPORT.JS  ***********************************
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -87,7 +98,6 @@ passport.deserializeUser(function(id, done) {
     	console.log('called deserializeUser - pg');
     	if (err) console.log(err);
         
-        console.log(data);
         user = JSON.parse(JSON.stringify(data[0]));	//mise ne place du json
         
         done(null, user);
@@ -97,16 +107,24 @@ passport.deserializeUser(function(id, done) {
     
 
 });
-///****************************************************
+
+//****************************************************************************************
 
 
-///************************api routes******************
+
+//**************** FICHIERS DE ROUTAGE  *****************
+
+//	var index = require('./routes/index');
+//	app.use('/', index);
+	
+	var auth = require('./routes/auth');
+	app.use('/api', auth);
+
+//*******************************************************
 
 
-///****************************************************
 
 
-app.use('/', index);	//seule des apis
 //app.use('/api/get_users', users);
 //app.use('/api/get_config', config3d);
 
