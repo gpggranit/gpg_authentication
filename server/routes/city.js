@@ -18,7 +18,7 @@ router.get('/city/get_all', function(req, res) {
         	}else{
         		cdpville = JSON.parse(JSON.stringify(data));	//mise ne place du json
                 
-                console.log(cdpville);
+                console.log('get all citys');
                 
                 res.status(200).send(cdpville);     		
         	}       	

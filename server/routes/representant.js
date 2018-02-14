@@ -18,7 +18,7 @@ router.get('/representant/get_all', function(req, res) {
         	}else{
         		representants = JSON.parse(JSON.stringify(data));	//mise ne place du json
                 
-                console.log(representants);
+                console.log('get all representants');
                 
                 res.status(200).send(representants);     		
         	}       	
